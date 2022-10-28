@@ -10,6 +10,7 @@ import {
   Text,
   View,
 } from 'react-native';
+import { NativeModules } from 'react-native';
 
 class App extends React.Component {
   state = {
@@ -40,10 +41,13 @@ class App extends React.Component {
 
   onButtonClick = () => {
     const now = new Date();
-    const copied = [...this.state.data];
-    copied.push(now.getTime().toString());
-    this.setState({
-      data: copied
+    const { PhoneBatteryModule } = NativeModules;
+    PhoneBatteryModule.getPhoneBattery(now.getTime().toString(), (result) => {
+      const copied = [...this.state.data];
+      copied.push(result);
+      this.setState({
+        data: copied
+      });
     });
   }
 };
