@@ -42,7 +42,7 @@ class App extends React.Component {
   onButtonClick = () => {
     const now = new Date();
     const { PhoneBatteryModule } = NativeModules;
-    PhoneBatteryModule.getPhoneBattery(now.getTime().toString(), (result) => {
+    PhoneBatteryModule.getPhoneBattery(now.getTime().toString(), "", (result) => {
       const copied = [...this.state.data];
       copied.push(result);
       this.setState({
